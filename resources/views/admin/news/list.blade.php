@@ -1,2 +1,2 @@
 <?php
-echo (hello);78
+echo (hello);
