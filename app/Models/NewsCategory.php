@@ -104,4 +104,8 @@ class NewsCategory extends \Eloquent
         $this->active = $active;
     }
 
+    public function news()
+    {
+        return $this->hasMany('App\Models\News','CategoryId');
+    }
 }

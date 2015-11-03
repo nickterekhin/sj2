@@ -37,4 +37,6 @@ Route::group(['middleware'=>'auth.dobby','prefix'=>'admin'],function() {
     Route::get('/', ['as' => 'admin', function () {
         return view('admin.home');
     }]);
+    Route::get('news-tags',array('as'=>'news-tags','uses'=>'Admin\TagsController@index'));
+
 });

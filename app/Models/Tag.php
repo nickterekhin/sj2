@@ -68,4 +68,8 @@ class Tag extends \Eloquent
         $this->active = $active;
     }
 
+    public function news()
+    {
+        return $this->belongsToMany('App\Models\News','news_tags','NewsId','TagsId');
+    }
 }

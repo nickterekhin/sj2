@@ -302,5 +302,14 @@ class News extends \Eloquent
         $this->active = $active;
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag','news_tags','NewsId','TagsIc');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\NewsCategory','CategoryId');
+    }
 
 }
