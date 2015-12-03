@@ -24,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->bind('App\Models\ModelsInterfaces\ITag','App\Models\ModelsInterfaces\Impl\TagImpl');
     }
 }
