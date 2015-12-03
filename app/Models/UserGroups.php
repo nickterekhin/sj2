@@ -24,8 +24,33 @@ class UserGroups extends \Eloquent
     protected $table='usergroups';
     protected $primaryKey = 'ugroup';
     public $timestamps = false;
+    protected $fillable = ['GroupName','Permissions'];
 
     protected static $userModel = 'App\Models\Users';
+
+    /**
+     * @param int $ugroup
+     */
+    public function setUgroup($ugroup)
+    {
+        $this->ugroup = $ugroup;
+    }
+
+    /**
+     * @param string $GroupName
+     */
+    public function setGroupName($GroupName)
+    {
+        $this->GroupName = $GroupName;
+    }
+
+    /**
+     * @param string $Permissions
+     */
+    public function setPermissions($Permissions)
+    {
+        $this->Permissions = $Permissions;
+    }
 
     public function getId()
     {
@@ -34,14 +59,13 @@ class UserGroups extends \Eloquent
 
     public function getPermissions()
     {
-        return preg_split('/\|/',$this->Permissions);
+        return $this->Permissions;
     }
 
     public function getGroupName()
     {
         return $this->GroupName;
     }
-
 
 
     public function getUsers()
@@ -54,5 +78,15 @@ class UserGroups extends \Eloquent
         return 'ugroup';
     }
 
+    /**
+     * @param string $permission
+     * @param string $needles
+     * @return bool
+     */
+    function isInPermission($permission, $needles)
+    {
+        $perms_arr = explode("|",$permission);
+        return in_array($needles,$perms_arr);
+    }
 
 }

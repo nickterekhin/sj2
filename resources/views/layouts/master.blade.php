@@ -47,7 +47,7 @@
 
     @yield('scripts')
 
-    @include('partials.analytics')
+   {{-- @include('partials.analytics')--}}
 
 </head>
 
@@ -65,7 +65,7 @@
 
 <footer>
 
-@include('partials.footer')
+{{--@include('partials.footer')--}}
 
 </footer>
 

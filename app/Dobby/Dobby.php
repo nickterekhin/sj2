@@ -8,7 +8,9 @@
 
 namespace App\Dobby;
 use App\Dobby\ModelProviders\IUsers;
+use App\Models\Users;
 use Illuminate\Cookie\CookieJar;
+use Illuminate\Http\Request;
 
 class Dobby
 {
@@ -29,6 +31,10 @@ class Dobby
         $this->request = $request;
         $this->cookie = $cookie;
     }
+
+    /**
+     * @return bool
+     */
     public function initUser()
     {
 
@@ -43,15 +49,29 @@ class Dobby
             \Debugbar::info($uid." - ".$passwd);
             if($uid!=null && $passwd!=null)
             {
-                $this->request->session()->put('user',$this->userProvider->getUserByCredential($passwd,$uid,true));
-                $this->request->session()->put('isLogged',1);
-                return true;
+                /** @var Users $user */
+                $user = $this->userProvider->getUserByCredential($passwd,$uid,true);
+
+                if($user!=null)
+                {
+                    $this->request->session()->put('user',$user);
+                    $this->request->session()->put('isLogged', 1);
+                    $this->request->session()->put('permissions', $this->userProvider->getPermissions($user->getGroup->Permissions));
+
+                    return true;
+                }
+                else
+                {
+                    $this->request->session()->put('isLogged',0);
+                    return false;
+                }
             }
             else
             {
                 $this->request->session()->put('isLogged',0);
                 return false;
             }
+
         }
     }
     public function login(array $credential, $remember = false)
@@ -99,4 +119,29 @@ class Dobby
             return false;
         }
     }
+
+    /**
+     * @param $permsString
+     * @return bool
+     */
+    public function checkRights($permsString)
+    {
+        if(in_array($permsString,$this->request->session()->get("permissions")))
+            return true;
+
+        if(in_array('all',$this->request->session()->get("permissions")))
+            return true;
+
+        return false;
+    }
+
+    public function checkUserState()
+    {
+        if ($this->request->session()->get("user")!=null && $this->request->session()->get("user")->getId()!=1) {
+            if (!$this->userProvider->getUserState($this->request->session()->get("user")->getId())) {
+                $this->logout();
+            }
+        }
+    }
+
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.20 (LTS) on 2015-10-26.
+ * Generated for Laravel 5.1.20 (LTS) on 2015-12-03.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -12651,6 +12651,7 @@ namespace {
         /**
          * 
          *
+         * @return bool 
          * @static 
          */
         public static function initUser(){
@@ -12682,6 +12683,26 @@ namespace {
          */
         public static function isLoggedIn(){
             return \App\Dobby\Dobby::isLoggedIn();
+        }
+        
+        /**
+         * 
+         *
+         * @param $permsString
+         * @return bool 
+         * @static 
+         */
+        public static function checkRights($permsString){
+            return \App\Dobby\Dobby::checkRights($permsString);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function checkUserState(){
+            return \App\Dobby\Dobby::checkUserState();
         }
         
     }

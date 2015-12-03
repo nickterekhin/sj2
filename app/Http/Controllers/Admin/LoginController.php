@@ -24,7 +24,7 @@ class LoginController extends Controller
             return \Redirect::to('admin');
         }
 
-        return view("login");
+        return view("admin.login");
     }
 
 

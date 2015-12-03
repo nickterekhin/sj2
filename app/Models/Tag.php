@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereTagName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereActive($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\News[] $news
  */
 class Tag extends \Eloquent
 {

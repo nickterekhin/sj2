@@ -300,8 +300,11 @@ a:hover, a:focus
 
 .action-buttons
 {
-    width: 300px;
+    min-width: 240px;
+    max-width: 290px;
+    width: auto;
 }
+
 
 .alert ul, .alert li
 {

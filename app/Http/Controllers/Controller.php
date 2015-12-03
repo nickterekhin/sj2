@@ -10,4 +10,19 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 abstract class Controller extends BaseController
 {
     use DispatchesJobs, ValidatesRequests;
+
+    /**
+     * @param string $text
+     * @param $cssClass
+     * @return array
+     */
+    protected function ShowMessage($text, $cssClass)
+    {
+        $message = array();
+
+        $message['form-message']=$text;
+        $message['form-message-type']=$cssClass;
+
+        return $message;
+    }
 }

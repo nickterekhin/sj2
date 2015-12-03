@@ -16,11 +16,17 @@ class InitUserMiddleware
     public function handle($request, Closure $next)
     {
         \Dobby::initUser();
-
+        \Dobby::checkUserState();
         if(!\Dobby::isLoggedIn())
         {
-            \Debugbar::addMessage('middleware 1');
-            return \Redirect::to('/admin/login');
+
+                return \Redirect::to('/admin/login');
+        }
+        else
+        {
+            if(!\Dobby::checkRights('AdminPanel')) {
+                return \Redirect::to('/');
+            }
         }
 
         return $next($request);

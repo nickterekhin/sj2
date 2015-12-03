@@ -39,6 +39,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\News whereSeoDescription($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\News whereSeoKeywords($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\News whereActive($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read \App\Models\NewsCategory $category
  */
 class News extends \Eloquent
 {

@@ -34,7 +34,7 @@
         <div class="navbar-collapse collapse">
             <ul class="user-nav nav navbar-nav navbar-right">
                 <li>
-                    <p class="navbar-text">Group: <span>{!! Session::get('user')->getGroupName() !!}</span></p>
+                    <p class="navbar-text">Group: <span>{!! Session::get('user')->getGroup->getGroupName() !!}</span></p>
                 </li>
                 <li>
                     <p class="navbar-text">Name: <span> {!! Session::get('user')->getFullName() !!}</span></p>
@@ -82,15 +82,17 @@
                     <li class="parent {!! \Request::is('admin/gallery','admin/gallery/*')? 'active':null !!}">
                         <a href="/admin/gallery" aria-expanded="false"><i class="fa fa-bullhorn" ></i> <span>Реклама</span></a>
                     </li>
-                    <li class="parent {!! \Request::is('admin/media','admin/media/*')? 'active':null !!}">
+                    @if(Dobby::checkRights("Admin"))
+                   {{-- <li class="parent {!! \Request::is('admin/media','admin/media/*')? 'active':null !!}">
                         <a href="/admin/media" aria-expanded="false"><i class="fa fa-key" ></i> <span>Разрешения</span></a>
+                    </li>--}}
+                    <li class="parent {!! \Request::is('admin/user-groups','admin/user-groups/*')? 'active':null !!}">
+                        <a href="/admin/user-groups" aria-expanded="false"><i class="fa fa-group" ></i> <span>Группы</span></a>
                     </li>
-                    <li class="parent {!! \Request::is('admin/media','admin/media/*')? 'active':null !!}">
-                        <a href="/admin/media" aria-expanded="false"><i class="fa fa-group" ></i> <span>Группы</span></a>
+                    <li class="parent {!! \Request::is('admin/users','admin/users/*')? 'active':null !!}">
+                        <a href="/admin/users" aria-expanded="false"><i class="fa fa-user" ></i> <span>Пользователи</span></a>
                     </li>
-                    <li class="parent {!! \Request::is('admin/media','admin/media/*')? 'active':null !!}">
-                        <a href="/admin/media" aria-expanded="false"><i class="fa fa-user" ></i> <span>Пользователи</span></a>
-                    </li>
+                    @endif
                 </ul>
             </div>
          </div>
@@ -114,10 +116,10 @@
                 ?>
                 <div class="pull-right">
                     <div class="btn-group">
-                        <a href="/{{ $currentPath }}/create" class="btn btn-success pull-right add-btn"><i class="fa fa-plus"></i>Add New</a>
+                        <a href="/{{ $currentPath }}/create" class="btn btn-success pull-right add-btn"><i class="fa fa-plus"></i>Добавить</a>
                     </div>
                     <div class="btn-group">
-                        <a href="/{{ $currentPath }}/" class="btn btn-primary pull-right add-btn"><i class="fa fa-hand-o-right"></i>View All</a>
+                        <a href="/{{ $currentPath }}/" class="btn btn-primary pull-right add-btn"><i class="fa fa-hand-o-right"></i>Обзор</a>
                     </div>
                 </div>
                 @endif

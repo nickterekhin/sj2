@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\NewsCategory whereCategoryName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\NewsCategory wherePosition($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\NewsCategory whereActive($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\News[] $news
  */
 class NewsCategory extends \Eloquent
 {
